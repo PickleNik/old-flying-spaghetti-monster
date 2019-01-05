@@ -1,24 +1,19 @@
 <template>
   <v-app dark class="head">
     <v-container fluid class="app">
-      <v-flex md3 lg2 class="zoom hidden-sm-and-down pa-4" style="position:fixed; z-index: 100; left:0; top:0;">
+      <v-flex md3 lg2 class="inDown hidden-sm-and-down pa-4" style="position:fixed; z-index: 100; left:0; top:0;">
         <v-layout column>
-          <h1 class="mb-3">
-            <v-layout row style="font-family: 'Indie Flower', sans-serif;"><v-icon left large color="amber">fas fa-pastafarianism</v-icon>Pastafarianism</v-layout>
-          </h1>
-          <a v-for="nav in navs" :key="nav.name" href="#" v-scroll-to="{el: nav.href, offset: -50}">
-            <v-btn small round flat class="ma-0 pr-2 link link--kukuri">
-              <v-icon left class="amber--text">{{ nav.icon }}</v-icon>
-              {{ nav.name }}
-            </v-btn>
-          </a>
+          <v-layout row class="mb-3" ><v-icon left color="amber">fas fa-pastafarianism</v-icon><h3>Pastafarianism</h3> </v-layout>
+          <a href="https://www.venganza.org/about/" target="_blank"><v-btn small round flat class="mx-0 link link--kukuri"><v-icon left class="amber--text">web</v-icon>Official Website</v-btn></a>
+          <a href="https://en.wikipedia.org/wiki/Flying_Spaghetti_Monster" target="_blank"><v-btn small round flat class="mx-0 link link--kukuri"><v-icon left class="amber--text">fas fa-globe</v-icon>Wikipedia</v-btn></a>
+          <a href="https://www.youtube.com/watch?v=7sfnnJBk3aY" target="_blank"><v-btn small round flat class="mx-0 link link--kukuri"><v-icon left class="amber--text">fab fa-youtube</v-icon>Youtube</v-btn></a>
         </v-layout>
       </v-flex>
-      <v-flex md3 lg2 class="zoom hidden-sm-and-down pa-4" style="position:fixed; z-index: 100; right:0; top:0;">
-        <h3>35,098,078<v-icon right color="amber">group</v-icon></h3>
+      <v-flex md3 lg2 class="inDown hidden-sm-and-down pa-4" style="position:fixed; z-index: 100; right:0; top:0;">
+        <h3>352,198,078<v-icon right color="amber">group</v-icon></h3>
       </v-flex>
-      <b class="py-3 mr-3" style="position:fixed; z-index: 100; right:0; bottom:0;" id="info">Made with <s class="pink">love</s> a<span class="amebr--text"> keyboard </span> by
-        <v-avatar size="28" class="mx-2">
+      <b class="pt-3 mr-3 inUp" style="position:fixed; z-index: 100; right:0; bottom:0;" id="info">Made with <s class="pink">love</s> a <span class="purple">keyboard</span> by
+        <v-avatar size="40" class="mx-2 mb-3">
           <img src="./assets/me.jpg">
         </v-avatar>
         <a href="https://nikita-krupin.firebaseapp.com">
@@ -30,8 +25,12 @@
       <v-layout row wrap>
         <v-flex xs12 sm12 md6 offset-md3 lg8 offset-lg2 class="text-xs-center mb-5">
           <v-layout column>
-            <img id="face" class="mx-auto my-3" src="https://i.pinimg.com/originals/88/24/27/8824273c0361aea1d755112a05bdbca0.gif">
-            <p class="pt-2 text-xs-justify" style="font-size: 1.5em; min-height: 4.5em;" id="greeting"></p>
+            <card3d id="face" class="zoom mx-auto my-3 hidden-xs-only" style="border-radius:100%; width:20em; height:20em;" data-image="https://i.pinimg.com/originals/88/24/27/8824273c0361aea1d755112a05bdbca0.gif">
+              <span slot="header" class="amber--text" style="font-family: 'Permanent Marker'; font-size: 1.5em;">Flying Spaghetti Monster</span>
+              <p slot="content" style="text-align: justify;" class="px-3 my-5"> <b>" I'd Really Rather You Didn't Use My Existence As A Means To Oppress, Subjugate, Punish, Eviscerate, And/Or, You Know, Be Mean To Others. I Don't Require Sacrifices, And Purity Is For Drinking Water, Not People."</b></p>
+            </card3d>
+            <img id="face" class="mx-auto my-3 hidden-sm-and-up" src="https://i.pinimg.com/originals/88/24/27/8824273c0361aea1d755112a05bdbca0.gif">
+            <p class="pt-2 mb-3 pb-3 text-xs-justify" style="font-size: 1.5em; min-height: 4.5em; font-family: 'Roboto Mono'" id="greeting"></p>
           </v-layout>
         </v-flex>
       </v-layout>
@@ -40,70 +39,18 @@
 </template>
 
 <script>
+import card3d from './components/3d.vue'
 import Typed from 'typed.js'
-// import firebase from 'firebase/app'
-// import 'firebase/auth'
 
 export default {
+  components: {
+    card3d: card3d
+  },
   data () {
     return {
-      typedOptions: ['Hi there', '3,4-Methyl​enedioxy​methamphetamine(or MDMA), commonly known as ecstasy, is a psychoactive drug primarily used as a recreational drug. The desired effects include altered sensations and increased energy, empathy, and pleasure. When taken by mouth, effects begin after 30–45 minutes and last 3–6 hours.'],
-      direction: 'bottom',
-      posts: [
-        {
-          title: 'What is Molly',
-          typed: true,
-          fab: false,
-          id: 'post1',
-          links: [
-            { title: 'Outline', href: 'https://docs.google.com/document/d/1iZa7Gf0W3FIoVVw-vEPF_gbyCfb3pTEAJkVRuuvI--A/edit?usp=sharing' }
-          ]
-        },
-        {
-          title: 'Quiz',
-          comment: '',
-          fab: false,
-          id: 'post2',
-          text: 'Tip of the day: Ecstasy, in fact, is a term for Molly which has been chemically altered with other additives, such as amphetamine, caffeine etc.',
-          links: [
-            { title: 'Quiz', href: 'https://www.justthinktwice.gov/quiz/quiz-ecstasy-and-mdma' },
-            { title: 'Source 1', href: 'https://www.drugabuse.gov/publications/drugfacts/mdma-ecstasymolly' },
-            { title: 'Source 2', href: 'https://teens.drugabuse.gov/drug-facts/mdma-ecstasy-or-molly' },
-            { title: 'Source 3', href: 'https://abovetheinfluence.com/drugs/mdma/' }
-          ]
-        },
-        {
-          title: 'Video',
-          comment: '',
-          fab: false,
-          id: 'post3',
-          video: 'https://www.youtube.com/embed/jEAr7ThsYew'
-        },
-        {
-          title: 'Article',
-          text: 'Developed in 1914 as an appetite suppressant, MDMA gained popularity in the 1980s with young adults at large music festivals and all-night dance parties or raves. \n The user experiences feelings of euphoria, increased energy, intimacy and emotional warmth, sensitivity to touch, and a distortion of time and of the senses. \n Ecstasy is frequently taken with other illegal drugs, and pills sold as MDMA on the street often contain additives. These factors can contribute to serious, and sometimes fatal, health effects. \n MDMA can also be addictive, and research suggests that long-term cognitive problems may develop in some users.',
-          comment: '',
-          fab: false,
-          id: 'post4',
-          links: [
-            { title: 'Full Article', href: 'https://www.medicalnewstoday.com/articles/297064.php' }
-          ]
-        },
-        {
-          title: 'Post 5',
-          comment: '',
-          image: 'https://media.giphy.com/media/pWP6AQg2KMc2Q/giphy.gif',
-          fab: false,
-          id: 'post5',
-          video: 'https://www.youtube.com/embed/_sXhbieSzZs'
-        }
-      ],
-      navs: [
-        { name: 'Creator', href: '#title', icon: 'assignment_ind' },
-        { name: 'About', href: '#post1', icon: 'assignment' },
-        { name: 'Quiz', href: '#post2', icon: 'assignment_turned_in' },
-        { name: 'Video', href: '#post3', icon: 'video_library' },
-        { name: 'Article', href: '#post4', icon: 'library_books' }
+      typedOptions: [
+        'Hello there',
+        '&nbsp;&nbsp;&nbsp;&nbsp;Pastafarianism (a portmanteau of pasta and Rastafarianism) is a social movement that promotes a light-hearted view of religion and opposes the teaching of intelligent design and creationism in public schools. According to adherents, Pastafarianism is a "real, legitimate religion, as much as any other". <br/><br/> &nbsp;&nbsp;&nbsp;&nbsp;The Flying Spaghetti Monster (FSM) is the deity of the Church of the Flying Spaghetti Monster, or Pastafarianism. Pastafarianism (a portmanteau of pasta and Rastafarianism) is a social movement that promotes a light-hearted view of religion and opposes the teaching of intelligent design and creationism in public schools. According to adherents, Pastafarianism is a "real, legitimate religion, as much as any other". In New Zealand, Pastafarian representatives are authorized to officiate weddings. However, in the United States, a federal judge has ruled that the "Church of the Flying Spaghetti Monster" is not a real religion. In August 2018 the Dutch Council of State also ruled that Pastafarianism is not a religion. <br/><br/> &nbsp;&nbsp;&nbsp;&nbsp;The "Flying Spaghetti Monster" was first described in a satirical open letter written by Bobby Henderson in 2005 to protest the Kansas State Board of Education decision to permit teaching intelligent design as an alternative to evolution in public school science classes. In the letter, Henderson demanded equal time in science classrooms for "Flying Spaghetti Monsterism", alongside intelligent design and evolution. After Henderson published the letter on his website, the Flying Spaghetti Monster rapidly became an Internet phenomenon and a symbol of opposition to the teaching of intelligent design in public schools. <br/><br/> &nbsp;&nbsp;&nbsp;&nbsp;Pastafarian tenets (generally satires of creationism) are presented both on Henderson\'s Church of the Flying Spaghetti Monster website, where he is described as "prophet", and in The Gospel of the Flying Spaghetti Monster, written by Henderson in 2006. The central belief is that an invisible and undetectable Flying Spaghetti Monster created the universe. Pirates are revered as the original Pastafarians. Henderson asserts that a decline in the number of pirates over the years is the cause of global warming. The FSM community congregates at Henderson\'s website to share ideas about the Flying Spaghetti Monster and crafts representing images of it. <br/><br/> &nbsp;&nbsp;&nbsp;&nbsp;Because of its popularity and exposure, the Flying Spaghetti Monster is often used as a contemporary version of Russell\'s teapot—an argument that the philosophic burden of proof lies upon those who make unfalsifiable claims, not on those who reject them. Pastafarianism has received praise from the scientific community and criticism from proponents of intelligent design. Pastafarians have engaged in disputes with creationists, including in Polk County, Florida, where they played a role in dissuading the local school board from adopting new rules on teaching evolution.'
       ]
     }
   },
@@ -111,7 +58,7 @@ export default {
     new Typed('#greeting', {// eslint-disable-line no-new
       strings: this.typedOptions,
       loop: false,
-      typeSpeed: 50,
+      typeSpeed: 30,
       backSpeed: 10,
       startDelay: 3000,
       backDelay: 2000,
@@ -119,49 +66,13 @@ export default {
       showCursor: false
     })
   }
-//   computed: {
-//     user () {
-//       return this.$store.getters.user
-//     },
-//     error () {
-//       return this.$store.getters.error
-//     },
-//     loading () {
-//       return this.$store.getters.loading
-//     },
-//     comments () {
-//       return this.$store.getters.comments
-//     }
-//   },
-//   created () {
-//     this.$store.dispatch('getComments')
-//   },
-//   methods: {
-//     GoogleSignIn () {
-//       this.$store.dispatch('userProvider', new firebase.auth.GoogleAuthProvider())
-//     },
-//     Logout () {
-//       this.$store.dispatch('userLogout')
-//     },
-//     addComment (text, id) {
-//       if (text !== '') {
-//         this.$store.dispatch('addComment', {text: text, post: id, creator: this.user.id, name: this.user.name, photo: this.user.photo})
-//         .then(this.$store.dispatch('getComments'))
-//       }
-//     },
-//     deleteComment (text) {
-//       this.$store.dispatch('deleteComment', text)
-//       .then(this.$store.dispatch('getComments'))
-//     }
-//   }
-// }
 }
 </script>
 
 <style media="screen">
-@import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 @import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
-@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 *{
   font-family: 'Quicksand', sans-serif;
 }
@@ -170,29 +81,6 @@ html{
 }
 a {
   text-decoration: none !important;
-}
-.v-input__slot {
-  border-radius: 2em !important;
-}
-.video {
-  -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%); /*ios 7 border-radius-bug */
-  -webkit-transform: rotate(0.000001deg); /*mac os 10.6 safari 5 border-radius-bug */
-  -webkit-border-radius: 3em;
-  -moz-border-radius: 3em;
-  border-radius: 3em;
-  overflow: hidden;
-  z-index: 9;
-  position: relative;
-  padding-bottom: 57%; /* 16:9 */
-  padding-top: 25px;
-  height: 0;
-}
-.video iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 body{
   overflow-y: scroll;
@@ -214,9 +102,6 @@ body{
   background-attachment: fixed;
   background-repeat: no-repeat;
   filter: brightness(50%);
-}
-.round{
-  border-radius: 2em;
 }
 ::-webkit-scrollbar{
   width: 0;
@@ -271,33 +156,6 @@ body{
     transform: none;
   }
 }
-@keyframes lightSpeedIn {
-  from {
-    transform: translate3d(100%, 0, 0) skewX(-30deg);
-    opacity: 0;
-  }
-
-  60% {
-    transform: skewX(20deg);
-    opacity: 1;
-  }
-
-  80% {
-    transform: skewX(-5deg);
-    opacity: 1;
-  }
-
-  to {
-    transform: none;
-    opacity: 1;
-  }
-}
-#title {
-  font-family: 'Indie Flower', sans-serif;
-  font-size: 3em;
-  opacity: 0;
-  animation: fadeInDown 1s 1s ease 1 forwards;
-}
 #face{
   opacity: 0;
   height: 30vh;
@@ -305,17 +163,17 @@ body{
   border-radius: 100%;
   animation: rollIn 1s 1.5s ease 1 forwards;
 }
-#info{
-  opacity: 0;
-  animation: lightSpeedIn 1s 1.5s ease 1 forwards;
-}
-.post{
-  opacity:0;
-  animation: fadeInUp 1s 2s ease 1 forwards;
-}
 .zoom{
   opacity:0;
   animation: zoomIn 1s 2s ease 1 forwards;
+}
+.inUp{
+  opacity:0;
+  animation: fadeInUp 1s 2s ease 1 forwards;
+}
+.inDown{
+  opacity:0;
+  animation: fadeInDown 1s 2s ease 1 forwards;
 }
 .link {
   text-decoration: none;
